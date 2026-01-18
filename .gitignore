@@ -1,0 +1,17 @@
+# xcode
+DerivedData/
+*.xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+
+# build
+build/
+*.ipa
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# macOS
+.DS_Store
