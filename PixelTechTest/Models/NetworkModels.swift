@@ -25,13 +25,15 @@ struct UsersResponse: Decodable {
 }
 
 struct User: Decodable {
-    let profileImage: String
+    let ID: Int
+    let profileImage: URL?
     let displayName: String
     let reputation: Int
     
     enum CodingKeys: String, CodingKey {
         case profileImage = "profile_image"
         case displayName = "display_name"
+        case ID = "user_id"
         case reputation
     }
 }
