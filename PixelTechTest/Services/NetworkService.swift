@@ -17,6 +17,34 @@ protocol NetworkServiceProtocol {
     func getData<T: Decodable>(from endpoint: Endpoint) async throws -> T
 }
 
+final class MockNetworkService: NetworkServiceProtocol {
+    
+    private var successResponses: [Endpoint: Any] = [:]
+    private var errorResponses: [Endpoint: Error] = [:]
+    
+    enum TestError: Error {
+        case missingExpectedResponse
+    }
+    
+    func addSuccessResponse<T: Decodable>(_ response: T, for endpoint: Endpoint) {
+        self.successResponses[endpoint] = response
+    }
+    
+    func addErrorResponse(_ error: Error, for endpoint: Endpoint) {
+        self.errorResponses[endpoint] = error
+    }
+    
+    func getData<T>(from endpoint: Endpoint) async throws -> T where T : Decodable {
+        if let errorResponse = errorResponses.first(where: {$0.key == endpoint})?.value {
+            throw errorResponse
+        } else if let successResponse = successResponses.first(where: {$0.key == endpoint})?.value as? T {
+            return successResponse
+        } else {
+            throw TestError.missingExpectedResponse
+        }
+    }
+}
+
 final class NetworkService: NetworkServiceProtocol {
     
     func getData<T: Decodable>(from endpoint: Endpoint) async throws -> T {

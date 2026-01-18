@@ -5,7 +5,7 @@
 //  Created by Phil Margetson on 18/01/2026.
 //
 
-enum UsersListViewState {
+enum UsersListViewState: Equatable {
     case loading
     case loaded(users: [User])
     case error(message: String)

@@ -20,7 +20,7 @@ class MainCoordinator: Coordinator {
     }
     
     func start() {
-        let usersListViewModel = UsersListViewModel(networkService: NetworkService(), followingDatastore: FollowingDatastore(suiteName: ""))
+        let usersListViewModel = UsersListViewModel(networkService: NetworkService(), followingDatastore: FollowingDatastore(suiteName: nil))
         let usersListViewController = UsersListViewController(viewModel: usersListViewModel)
         navigationController.pushViewController(usersListViewController, animated: true)
     }

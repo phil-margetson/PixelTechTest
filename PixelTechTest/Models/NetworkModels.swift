@@ -24,7 +24,7 @@ struct UsersResponse: Decodable {
     let items: [User]
 }
 
-struct User: Decodable {
+struct User: Decodable, Equatable {
     let ID: Int
     let profileImage: URL?
     let displayName: String

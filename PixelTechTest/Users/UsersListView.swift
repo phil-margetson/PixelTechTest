@@ -24,11 +24,13 @@ class UsersListView: UIView {
     }
     
     private func setupView() {
+        self.backgroundColor = .systemBackground
         tableview.register(UserListCell.self, forCellReuseIdentifier: UserListCell.reuseID)
         tableview.separatorStyle = .none
         spinner.isHidden = true
         errorMessageLabel.isHidden = true
         errorMessageLabel.numberOfLines = 0 //allow multiline if a verbose error needed
+        errorMessageLabel.textAlignment = .center
         
     }
     
@@ -116,7 +118,7 @@ class UserListCell: UITableViewCell {
         nameLabel.text = userName
         reputationLabel.text = String(userReputation)
         if isFollowing {
-            followButton.setTitle("Following", for: .normal)
+            followButton.setTitle("Unfollow", for: .normal)
             followButton.backgroundColor = .red
         } else {
             followButton.setTitle("Follow", for: .normal)
